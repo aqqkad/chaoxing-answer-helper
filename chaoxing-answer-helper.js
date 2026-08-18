@@ -24,41 +24,50 @@
         right: 24px;
         z-index: 999999;
         width: 320px;
-        padding: 14px;
-        border-radius: 14px;
-        background: rgba(20, 28, 45, 0.96);
-        color: #f4f7fb;
-        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+        padding: 16px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #ffffff;
+        color: #1f2937;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
         font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
       }
       #${PANEL_ID} * {
         box-sizing: border-box;
       }
       #${PANEL_ID} .cx-title {
-        margin: 0 0 8px;
+        margin: 0 0 6px;
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 600;
+        color: #111827;
       }
       #${PANEL_ID} .cx-tip {
-        margin: 0 0 10px;
+        margin: 0 0 12px;
         font-size: 12px;
-        line-height: 1.5;
-        color: #c9d4e7;
+        line-height: 1.6;
+        color: #6b7280;
       }
       #${PANEL_ID} textarea {
         width: 100%;
         height: 180px;
         resize: vertical;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
         padding: 10px 12px;
-        background: rgba(255, 255, 255, 0.08);
-        color: #ffffff;
+        outline: none;
+        background: #ffffff;
+        color: #111827;
+        font: inherit;
         font-size: 13px;
         line-height: 1.5;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+      #${PANEL_ID} textarea:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
       }
       #${PANEL_ID} textarea::placeholder {
-        color: #aebcd3;
+        color: #9ca3af;
       }
       #${PANEL_ID} .cx-actions {
         display: flex;
@@ -66,28 +75,39 @@
         margin-top: 10px;
       }
       #${PANEL_ID} button {
-        border: 0;
-        border-radius: 10px;
-        padding: 10px 12px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 9px 12px;
         cursor: pointer;
+        font-family: inherit;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 600;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
       }
       #${PANEL_ID} .cx-primary {
         flex: 1;
-        background: #58a6ff;
-        color: #0b1728;
+        background: #2563eb;
+        color: #ffffff;
+      }
+      #${PANEL_ID} .cx-primary:hover {
+        background: #1d4ed8;
       }
       #${PANEL_ID} .cx-secondary {
-        background: rgba(255, 255, 255, 0.12);
-        color: #ffffff;
+        border-color: #d1d5db;
+        background: #ffffff;
+        color: #4b5563;
+      }
+      #${PANEL_ID} .cx-secondary:hover {
+        background: #f3f4f6;
       }
       #${PANEL_ID} .cx-status {
         margin-top: 10px;
         min-height: 18px;
+        padding-top: 10px;
+        border-top: 1px solid #f0f1f3;
         font-size: 12px;
         line-height: 1.5;
-        color: #dce6f7;
+        color: #6b7280;
         white-space: pre-wrap;
       }
     `;
