@@ -7,8 +7,9 @@
 油猴脚本：
 
 1. 安装 Tampermonkey。
-2. 新建脚本并粘贴 `chaoxing-answer-helper.user.js`。
-3. 进入 `mooc1.chaoxing.com` 的作业页面，右下角会出现“答案助手”按钮。
+2. 新建脚本并粘贴 `chaoxing-answer-helper.js`。
+3. 进入 `mooc1.chaoxing.com` 的作业页面，面板默认收起，点击右下角“答案助手”按钮手动展开。
+4. 点击面板内的“收起”或右下角“收起答案助手”按钮可再次收起，已输入的答案会保留。
 
 ## 答案格式
 

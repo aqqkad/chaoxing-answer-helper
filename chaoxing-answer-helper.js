@@ -1,13 +1,23 @@
 (function () {
   const PANEL_ID = "cx-answer-helper-panel";
+  const TOGGLE_ID = "cx-answer-helper-toggle";
   const STYLE_ID = "cx-answer-helper-style";
   const TEXTAREA_ID = "cx-answer-helper-input";
   const STATUS_ID = "cx-answer-helper-status";
 
   if (document.getElementById(PANEL_ID)) {
     const panel = document.getElementById(PANEL_ID);
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
+    setExpanded(panel.style.display === "none");
     return;
+  }
+
+  function setExpanded(expanded) {
+    document.getElementById(PANEL_ID).style.display = expanded ? "block" : "none";
+    const toggle = document.getElementById(TOGGLE_ID);
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", String(expanded));
+      toggle.textContent = expanded ? "收起答案助手" : "答案助手";
+    }
   }
 
   function ensureStyle() {
@@ -18,6 +28,25 @@
     const style = document.createElement("style");
     style.id = STYLE_ID;
     style.textContent = `
+      #${TOGGLE_ID} {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 999999;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 16px;
+        background: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+        cursor: pointer;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      #${TOGGLE_ID}:hover {
+        background: #1d4ed8;
+      }
       #${PANEL_ID} {
         position: fixed;
         top: 88px;
@@ -363,6 +392,7 @@
 
   const panel = document.createElement("div");
   panel.id = PANEL_ID;
+  panel.style.display = "none";
   panel.innerHTML = `
     <div class="cx-title">答案辅助填题</div>
     <div class="cx-tip">支持三种格式：<br>1. 按顺序一行一个：A / ABC / T<br>2. 单行分隔：A/ABC/T/F/BD<br>3. 带题号：1.A  2.ABC  41.T</div>
@@ -370,12 +400,23 @@
     <div class="cx-actions">
       <button type="button" class="cx-primary" id="cx-answer-helper-apply">应用答案</button>
       <button type="button" class="cx-secondary" id="cx-answer-helper-clear">清空</button>
-      <button type="button" class="cx-secondary" id="cx-answer-helper-close">关闭</button>
+      <button type="button" class="cx-secondary" id="cx-answer-helper-close">收起</button>
     </div>
     <div class="cx-status" id="${STATUS_ID}">把答案贴进来后，点“应用答案”。</div>
   `;
 
   document.body.appendChild(panel);
+
+  const toggle = document.createElement("button");
+  toggle.id = TOGGLE_ID;
+  toggle.type = "button";
+  toggle.setAttribute("aria-controls", PANEL_ID);
+  document.body.appendChild(toggle);
+  setExpanded(false);
+
+  toggle.addEventListener("click", function () {
+    setExpanded(panel.style.display === "none");
+  });
 
   document.getElementById("cx-answer-helper-apply").addEventListener("click", function () {
     const text = document.getElementById(TEXTAREA_ID).value;
@@ -388,7 +429,7 @@
   });
 
   document.getElementById("cx-answer-helper-close").addEventListener("click", function () {
-    panel.style.display = "none";
+    setExpanded(false);
   });
 
   document.getElementById(TEXTAREA_ID).addEventListener("keydown", function (event) {
